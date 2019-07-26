@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div>\n  <app-line-chart></app-line-chart>\n</div>\n<div>\n  <app-pie-chart></app-pie-chart>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"header\">\n      <h2>\n          Charts Dashboard\n      </h2>\n  </div>\n  \n  <div class=\"row\">\n      <div class=\"col-7\">\n          <app-line-chart></app-line-chart>\n      </div>\n      <div class=\"col-5\">\n          <app-pie-chart></app-pie-chart>\n      </div>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-12\">\n          <app-table-chart></app-table-chart>\n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -52,7 +52,7 @@ module.exports = "<div  id=\"divLineChart\">\n\n</div>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div  id=\"divPieChart\">\n\n</div>"
+module.exports = "<div class=\"donut\" id=\"divDonutchart\">\n\n</div>"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ module.exports = "<div  id=\"divPieChart\">\n\n</div>"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>table-chart works!</p>\n"
+module.exports = "<div id=\"divTableChart\">\n\n</div>"
 
 /***/ }),
 
@@ -182,7 +182,7 @@ GoogleChartModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _service_service_module__WEBPACK_IMPORTED_MODULE_3__["ServiceModule"]
         ],
-        exports: [_line_chart_line_chart_component__WEBPACK_IMPORTED_MODULE_4__["LineChartComponent"], _pie_chart_pie_chart_component__WEBPACK_IMPORTED_MODULE_5__["PieChartComponent"]],
+        exports: [_line_chart_line_chart_component__WEBPACK_IMPORTED_MODULE_4__["LineChartComponent"], _pie_chart_pie_chart_component__WEBPACK_IMPORTED_MODULE_5__["PieChartComponent"], _table_chart_table_chart_component__WEBPACK_IMPORTED_MODULE_6__["TableChartComponent"]],
         providers: []
     })
 ], GoogleChartModule);
@@ -229,14 +229,18 @@ let LineChartComponent = class LineChartComponent {
     }
     drawChart() {
         let data = this.gLib.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses'],
-            ['2004', 1000, 400],
-            ['2005', 1170, 460],
-            ['2006', 660, 1120],
-            ['2007', 1030, 540]
+            ['Year', 'Sales', 'Expenses', 'Cash'],
+            ['2004', 1000, 400, 1000],
+            ['2005', 1170, 460, 1200],
+            ['2006', 660, 1120, 800],
+            ['2007', 1030, 540, 2100]
         ]);
+        var options = {
+            legend: 'none',
+            colors: ['green', 'blue', 'red']
+        };
         let chart = new this.gLib.visualization.LineChart(document.getElementById('divLineChart'));
-        chart.draw(data);
+        chart.draw(data, options);
     }
 };
 LineChartComponent.ctorParameters = () => [
@@ -262,7 +266,7 @@ LineChartComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dvb2dsZS1jaGFydC9waWUtY2hhcnQvcGllLWNoYXJ0LmNvbXBvbmVudC5zY3NzIn0= */"
+module.exports = ".donut {\n  width: 900px;\n  height: 500px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2RlbmlzL0Rlc2t0b3AvZXN0dWRvLXByb2pldG9zL2NoYXJ0cy1kYXNoYm9hcmQvc3JjL2FwcC9nb29nbGUtY2hhcnQvcGllLWNoYXJ0L3BpZS1jaGFydC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvZ29vZ2xlLWNoYXJ0L3BpZS1jaGFydC9waWUtY2hhcnQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0VBQ0EsYUFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvZ29vZ2xlLWNoYXJ0L3BpZS1jaGFydC9waWUtY2hhcnQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZG9udXQge1xuICAgIHdpZHRoOiA5MDBweDsgXG4gICAgaGVpZ2h0OiA1MDBweDtcbn0iLCIuZG9udXQge1xuICB3aWR0aDogOTAwcHg7XG4gIGhlaWdodDogNTAwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -292,18 +296,23 @@ let PieChartComponent = class PieChartComponent {
     ngOnInit() {
     }
     drawChart() {
-        let chart = new this.gLib.visualization.PieChart(document.getElementById('divPieChart'));
+        let chart = new this.gLib.visualization.PieChart(document.getElementById('divDonutchart'));
         let data = new this.gLib.visualization.DataTable();
-        data.addColumn('string', 'Accessories');
-        data.addColumn('number', 'Quantity');
+        data.addColumn('string', 'Credit');
+        data.addColumn('number', 'App');
         data.addRows([
-            ['Computers', 3],
-            ['Hard Drives', 6],
-            ['Printers', 4],
-            ['Monitors', 5],
-            ['RAM', 2]
+            ['Credit', 800],
+            ['App Loja', 1000]
         ]);
-        let options = { 'title': 'Sales Info' };
+        let options = {
+            'title': 'Info',
+            pieHole: 0.8,
+            colors: ['#007AFF', '#39424C'],
+            pieSliceTextStyle: {
+                color: 'black',
+            },
+            legend: 'none'
+        };
         chart.draw(data, options);
     }
 };
@@ -412,20 +421,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableChartComponent", function() { return TableChartComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _service_google_chart_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/google-chart.service */ "./src/app/google-chart/service/google-chart.service.ts");
+
 
 
 let TableChartComponent = class TableChartComponent {
-    constructor() { }
+    constructor(gChartService) {
+        this.gChartService = gChartService;
+        this.gLib = this.gChartService.getGoogle();
+        this.gLib.charts.load('current', { 'packages': ['corechart', 'table'] });
+        this.gLib.charts.setOnLoadCallback(this.drawChart.bind(this));
+    }
     ngOnInit() {
     }
+    drawChart() {
+        let chart = new this.gLib.visualization.Table(document.getElementById('divTableChart'));
+        let data = new this.gLib.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Sales');
+        data.addColumn('number', 'Expenses');
+        data.addRows([
+            ['2004', 1000, 400],
+            ['2005', 1170, 460],
+            ['2006', 660, 1120],
+            ['2007', 1030, 540]
+        ]);
+        let options = {
+            'title': 'Sales Tabular Data',
+            'width': '100%',
+            'height': '100%'
+        };
+        chart.draw(data, options);
+    }
 };
+TableChartComponent.ctorParameters = () => [
+    { type: _service_google_chart_service__WEBPACK_IMPORTED_MODULE_2__["GoogleChartService"] }
+];
 TableChartComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-table-chart',
         template: __webpack_require__(/*! raw-loader!./table-chart.component.html */ "./node_modules/raw-loader/index.js!./src/app/google-chart/table-chart/table-chart.component.html"),
         styles: [__webpack_require__(/*! ./table-chart.component.scss */ "./src/app/google-chart/table-chart/table-chart.component.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_service_google_chart_service__WEBPACK_IMPORTED_MODULE_2__["GoogleChartService"]])
 ], TableChartComponent);
 
 

@@ -19,7 +19,7 @@ export class PieChartComponent implements OnInit {
   ngOnInit() {
   }
 
-  private drawChart(){
+  private drawChart() {
     let chart = new this.gLib.visualization.PieChart(document.getElementById('divDonutchart'));
     let data = new this.gLib.visualization.DataTable();
     data.addColumn('string', 'Credit');
@@ -30,9 +30,13 @@ export class PieChartComponent implements OnInit {
     ]);
 
     let options = {
-      'title':'Info',
+     // 'title':'Info',
       pieHole: 0.8,
-      colors: ['#007AFF', '#39424C']
+      colors: ['#007AFF', '#39424C'],
+      pieSliceTextStyle: {
+        color: 'black',
+      },
+      legend: 'none'
   };
 
     chart.draw(data, options);

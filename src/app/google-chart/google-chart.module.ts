@@ -11,7 +11,7 @@ import { TableChartComponent } from './table-chart/table-chart.component';
     CommonModule,
     ServiceModule
   ],
-  exports: [LineChartComponent, PieChartComponent],
+  exports: [LineChartComponent, PieChartComponent, TableChartComponent],
   providers : []
 })
 export class GoogleChartModule { }
