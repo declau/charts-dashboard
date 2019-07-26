@@ -21,16 +21,20 @@ export class LineChartComponent implements OnInit {
 
   private drawChart(){
     let data = this.gLib.visualization.arrayToDataTable([
-      ['Year', 'Sales', 'Expenses'],
-      ['2004',  1000,      400],
-      ['2005',  1170,      460],
-      ['2006',  660,       1120],
-      ['2007',  1030,      540]
+      ['Year', 'Sales', 'Expenses', 'Cash'],
+      ['2004',  1000,      400,    1000],
+      ['2005',  1170,      460,    1200],
+      ['2006',  660,       1120,    800],
+      ['2007',  1030,      540,    2100]
     ]);
+    var options = {
+      legend: 'none',
+      colors: ['green', 'blue', 'red']
+    };
 
     let chart = new this.gLib.visualization.LineChart(document.getElementById('divLineChart'));
 
-    chart.draw(data);
+    chart.draw(data, options);
   }
 
 }

@@ -20,19 +20,20 @@ export class PieChartComponent implements OnInit {
   }
 
   private drawChart(){
-    let chart = new this.gLib.visualization.PieChart(document.getElementById('divPieChart'));
+    let chart = new this.gLib.visualization.PieChart(document.getElementById('divDonutchart'));
     let data = new this.gLib.visualization.DataTable();
-    data.addColumn('string', 'Accessories');
-    data.addColumn('number', 'Quantity');
+    data.addColumn('string', 'Credit');
+    data.addColumn('number', 'App');
     data.addRows([
-      ['Computers', 3],
-      ['Hard Drives', 6],
-      ['Printers', 4],
-      ['Monitors', 5],
-      ['RAM', 2]
+      ['Credit', 800],
+      ['App Loja', 1000]
     ]);
 
-    let options = {'title':'Sales Info'};
+    let options = {
+      'title':'Info',
+      pieHole: 0.8,
+      colors: ['#007AFF', '#39424C']
+  };
 
     chart.draw(data, options);
   }
