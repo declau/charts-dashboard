@@ -22,15 +22,20 @@ export class TableChartComponent implements OnInit {
     let chart = new this.gLib.visualization.Table(document.getElementById('divTableChart'));
     let data = new this.gLib.visualization.DataTable();
 
-    data.addColumn('string', 'Year');
-    data.addColumn('number', 'Sales');
-    data.addColumn('number', 'Expenses');
+    data.addColumn('string', 'Pagamentos');
+    data.addColumn('number', 'R$ Total');
+    data.addColumn('number', 'Pagamentos (Saldo)');
+    data.addColumn('number', 'Pagamentos (CC)');
+    data.addColumn('number', 'R$ Cartão de Crédito');
+    data.addColumn('number', 'Recargas Realizadas');
+    data.addColumn('number', 'Recarga');
+    data.addColumn('number', 'R$ Total Recebido');
 
     data.addRows([
-      ['2004', 1000, 400],
-      ['2005', 1170, 460],
-      ['2006', 660, 1120],
-      ['2007', 1030, 540]
+      ['2004', 1000, 400, 300, 5000, 6000, 999, 9000],
+      ['2005', 1170, 460, 300, 5000, 6000, 999, 9000],
+      ['2006', 660, 1120, 300, 5000, 6000, 999, 9000],
+      ['2007', 1030, 540, 300, 5000, 6000, 999, 9000],
     ]);
 
     let options = {
